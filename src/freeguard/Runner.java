@@ -9,13 +9,13 @@ package freeguard;
  *
  * @author Keenan
  */
-public class Main {
+public class Runner {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        newuser u = new newuser();
+        NewUser u = new NewUser();
         u.main(null);
         //login l = new login();
         //l.main(null);

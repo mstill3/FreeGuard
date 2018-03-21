@@ -6,8 +6,7 @@
 package freeguard;
 
 /**
- *
- * @author Keenan
+ * @author Keenan, Matt
  */
 
 //import statements
@@ -15,11 +14,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Connectivity //create class Connectivity
+public class Connectivity
 { 
-		// JDBC driver name and database URL
-		static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-		
+            // JDBC driver name and database URL
+            static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	    static final String DB_URL = "jdbc:mysql://localhost:3306/412project";
 
 	    //  Database credentials

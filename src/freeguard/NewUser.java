@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class newuser extends JFrame //create class NewUser
+public class NewUser extends JFrame //create class NewUser
 {
 
     private JPanel contentPane; //declare variable
@@ -51,7 +51,7 @@ public class newuser extends JFrame //create class NewUser
                 try //try block
                 {
                     //create NewUser frame object
-                    newuser frame = new newuser();
+                    NewUser frame = new NewUser();
                     //set NewUser frame visible
                     frame.setVisible(true);
                 } catch (Exception e) //catch block
@@ -65,7 +65,7 @@ public class newuser extends JFrame //create class NewUser
     /**
      * Create the frame.
      */
-    public newuser() //create constructor
+    public NewUser() //create constructor
     {
         //set title
         setTitle("New User Login");
