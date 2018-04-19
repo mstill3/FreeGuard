@@ -33,7 +33,7 @@ public class Login extends JFrame //create class NewUser
 	protected java.lang.String Spassword;
 	
 	// database URL
-	static final String DB_URL = "jdbc:mysql://localhost/412project";
+	static final String DB_URL = "jdbc:mysql://db412.cklzsxoqzmcc.us-east-2.rds.amazonaws.com";
 	
 	//  Database credentials
 	static final String USER = "root";
@@ -133,7 +133,7 @@ public class Login extends JFrame //create class NewUser
 				}
 				else  //else select query is run properly
                                 {
-					String SQuery = "Select password from accounts where username = " + "'" + username + "'";
+					String SQuery = "Select password from accounts where email = " + "'" + username + "'";
 					System.out.println(SQuery);//print on console
 					System.out.println("Connecting to a selected database...");
 				
@@ -185,5 +185,3 @@ public class Login extends JFrame //create class NewUser
 		}
                                 			
 }
-				
-
