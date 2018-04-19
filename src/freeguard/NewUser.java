@@ -33,7 +33,7 @@ public class NewUser extends JFrame //create class NewUser
     protected java.lang.String Spassword;
 
     // database URL
-    static final String DB_URL = "jdbc:mysql://localhost/412project";
+    static final String DB_URL = "jdbc:mysql://db412.cklzsxoqzmcc.us-east-2.rds.amazonaws.com";
 
     //  Database credentials
     static final String USER = "root";
