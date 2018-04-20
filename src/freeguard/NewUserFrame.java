@@ -1,27 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 412: Software Engineering
+ * Team Honey Badgers
+ * 4-20-2017
+ * 
+ * This is the main runner class
  */
+
 package freeguard;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.Wrapper;
 import javax.swing.JOptionPane;
+import javax.swing.JApplet;
+import java.awt.event.ActionEvent;
 
-/**
- *
- * @author Keenan
- */
-public class NewUserFrame extends javax.swing.JApplet {
+public class NewUserFrame extends JApplet
+{
 
-    /**
-     * Initializes the applet newUserFrame
-     */
+    //Initializes the applet newUserFrame
     @Override
-    public void init() {
+    public void init()
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -187,11 +185,11 @@ public class NewUserFrame extends javax.swing.JApplet {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFNActionPerformed
+    private void txtFNActionPerformed(ActionEvent evt) {//GEN-FIRST:event_txtFNActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFNActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
                  //  Database credentials
                 final String USER = "root";
                 final String PASS = "toorroot";
@@ -278,21 +276,17 @@ public class NewUserFrame extends javax.swing.JApplet {
                         System.out.println("Connecting to a selected database...");
 
                         //STEP 3: Open a connection
-                        conn = DriverManager.getConnection(NewUser.DB_URL, USER, PASS);
-                        System.out.println("Connected database successfully...");
+DatabaseManager db = new DatabaseManager();
+System.out.println("Connected database successfully...");
 
-                        ((Connection) conn).createStatement().execute(IQuery);//select the rows
-                        // define SMessage variable
+db.runQuery(IQuery); // define SMessage variable
                         String SMessage = "Record added for " + username;
 
                         // create dialog ox which is print message
                         JOptionPane.showMessageDialog(null, SMessage, "Message", JOptionPane.PLAIN_MESSAGE);
                         //close connection
-                        ((java.sql.Connection) conn).close();
+                        db.closeConnection();
                     }
-                } catch (SQLException se) {
-                    //handle errors for JDBC
-                    se.printStackTrace();
                 } catch (Exception a) //catch block
                 {
                     a.printStackTrace();

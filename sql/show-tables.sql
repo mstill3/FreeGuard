@@ -1,0 +1,2 @@
+use mydatabase;
+show tables;

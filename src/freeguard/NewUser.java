@@ -32,14 +32,6 @@ public class NewUser extends JFrame //create class NewUser
     private JTextField txtPassword;
     protected java.lang.String Spassword;
 
-    // database URL
-    static final String DB_URL = "jdbc:mysql://db412.cklzsxoqzmcc.us-east-2.rds.amazonaws.com";
-
-    //  Database credentials
-    static final String USER = "root";
-    static final String PASS = "root";
-    protected static final String String = null;
-
     /**
      * Launch the application.
      */
@@ -181,26 +173,22 @@ public class NewUser extends JFrame //create class NewUser
                         System.out.println(IQuery);//print on console
                         System.out.println("Connecting to a selected database...");
 
-                        //STEP 3: Open a connection
-                        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                        DatabaseManager db = new DatabaseManager();
                         System.out.println("Connected database successfully...");
 
-                        ((Connection) conn).createStatement().execute(IQuery);//select the rows
+                        db.runQuery(IQuery);
                         // define SMessage variable
                         String SMessage = "Record added for " + username;
 
                         // create dialog ox which is print message
                         JOptionPane.showMessageDialog(null, SMessage, "Message", JOptionPane.PLAIN_MESSAGE);
                         //close connection
-                        ((java.sql.Connection) conn).close();
+                        db.closeConnection();
                     }
-                } catch (SQLException se) {
+                } catch (Exception se) {
                     //handle errors for JDBC
                     se.printStackTrace();
-                } catch (Exception a) //catch block
-                {
-                    a.printStackTrace();
-                }
+                } 
             }
         });
         //set bound for SignUp button

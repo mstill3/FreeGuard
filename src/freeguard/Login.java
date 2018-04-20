@@ -31,15 +31,7 @@ public class Login extends JFrame //create class NewUser
 	private JButton btnSignup;
 	private JTextField txtPassword;
 	protected java.lang.String Spassword;
-	
-	// database URL
-	static final String DB_URL = "jdbc:mysql://db412.cklzsxoqzmcc.us-east-2.rds.amazonaws.com";
-	
-	//  Database credentials
-	static final String USER = "root";
-	static final String PASS = "root";
-	protected static final String String = null;
-	
+        
 	/**
 	 * Launch the application.
 	 */
@@ -133,16 +125,16 @@ public class Login extends JFrame //create class NewUser
 				}
 				else  //else select query is run properly
                                 {
-					String SQuery = "Select password from accounts where email = " + "'" + username + "'";
-					System.out.println(SQuery);//print on console
+                                    	String SQuery1 = "use mydatabase";
+					String SQuery2 = "select password from User where username = " + "'" + username + "'";
+//					System.out.println(SQuery);//print on console
 					System.out.println("Connecting to a selected database...");
 				
 				//STEP 3: Open a connection
-				conn = DriverManager.getConnection(DB_URL, USER, PASS);
-					System.out.println("Connected database successfully...");
-					  //pull password connected to username
-				Statement stmt = ((Connection)conn).createStatement();
-                                ResultSet rs = stmt.executeQuery(SQuery);
+				DatabaseManager db = new DatabaseManager();
+                                db.runQuery(SQuery1);
+                                ResultSet rs = db.getQueryValue(SQuery2);
+                                
                                 String SMessage;
                                 if(!rs.next())
                                     SMessage = "Account name not found";
@@ -155,7 +147,7 @@ public class Login extends JFrame //create class NewUser
                                        // create dialog ox which is print message
 	                    JOptionPane.showMessageDialog(null,SMessage,"Message",JOptionPane.PLAIN_MESSAGE);
 					//close connection
-					((java.sql.Connection)conn).close();
+//					((java.sql.Connection)conn).close();
 				}				
 			}
 			catch (SQLException se) 
