@@ -1,14 +1,35 @@
-<?php
-    $db = mysqli_connect('hostname','username','password','databasename');
-?>
+
+<!DOCTYPE html>
 <html>
-    <body>
-          <?php
-                $query = "SELECT * FROM `mytable`;";
-                $result = mysqli_query($db, $query);
-                while($row = mysqli_fetch_assoc($result)) {
-                      // Display your datas on the page
-                }
-          ?>
-    </body>
+<body>
+
+<?php
+$servername = "mydatabase.cvgyj3lrdmp1.us-east-2.rds.amazonaws.com";
+$username = "root";
+$password = "gooseberry";
+$dbname = "mydatabase";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT ssn fname lname FROM User";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<br> ssn: ". $row["ssn"]. " - Name: ". $row["fname"]. " " . $row["lname"] . "<br>";
+    }
+} else {
+    echo "0 results";
+}
+
+$conn->close();
+?>
+
+</body>
 </html>
