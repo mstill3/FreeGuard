@@ -32,6 +32,14 @@ public class NewUser extends JFrame //create class NewUser
     private JTextField txtPassword;
     protected java.lang.String Spassword;
 
+    // database URL
+    static final String DB_URL = "jdbc:mysql://localhost/412project";
+
+    //  Database credentials
+    static final String USER = "root";
+    static final String PASS = "root";
+    protected static final String String = null;
+
     /**
      * Launch the application.
      */
@@ -169,7 +177,7 @@ public class NewUser extends JFrame //create class NewUser
                     }
                     if(valid)//else insert query is run properly
                     {
-                        String IQuery = "INSERT INTO `412project`.`accounts`(`username`,`password`) VALUES('" + username + "', '" + password + "')";
+                        String IQuery = "INSERT INTO `freeguardcosc412db`.`Accounts`(`username`,`password`,`ssn`) VALUES('" + username + "', '" + password + "', 987654321)";
                         System.out.println(IQuery);//print on console
                         System.out.println("Connecting to a selected database...");
 
