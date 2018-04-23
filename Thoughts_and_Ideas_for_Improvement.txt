@@ -1,0 +1,8 @@
+FEEL FREE TO ADD IF YOU THINK OF ANYTHING
+
+- should make DB_URL a global variable, 
+  or create a method/class that takes care of the database calls
+
+- sign up will need a field for SSN
+
+

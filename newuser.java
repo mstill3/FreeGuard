@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package freeguard;
+package pkg412project;
 
 /**
  *
@@ -14,7 +14,6 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.sql.Wrapper;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,45 +23,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class Login extends JFrame //create class NewUser
+public class newuser extends JFrame //create class NewUser
 {
-	private JPanel contentPane; //declare variable
-	private JTextField txtUser;
-	private JButton btnSignup;
-	private JTextField txtPassword;
-	protected java.lang.String Spassword;
-	
-	// database URL
-	static final String DB_URL = "jdbc:mysql://localhost/412project";
-	
-	//  Database credentials
-	static final String USER = "root";
-	static final String PASS = "root";
-	protected static final String String = null;
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) // main method
-	{
-		EventQueue.invokeLater(new Runnable() 
-		{
-			public void run() //define run method
-			{
-				try  //try block
-				{
-					//create NewUser frame object
-					Login frame = new Login();
-                                        //set NewUser frame visible
-					frame.setVisible(true);
-				} 
-				catch (Exception e) //catch block
-				{
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
     private JPanel contentPane; //declare variable
     private JTextField txtUser;
@@ -71,11 +33,11 @@ public class Login extends JFrame //create class NewUser
     protected java.lang.String Spassword;
 
     // database URL
-    static final String DB_URL = "jdbc:mysql://freeguardcosc412.cydcykknz8wc.us-east-1.rds.amazonaws.com:3306/mysql?zeroDateTimeBehavior=convertToNull";
+    static final String DB_URL = "jdbc:mysql://db412.cklzsxoqzmcc.us-east-2.rds.amazonaws.com";
 
     //  Database credentials
-    static final String USER = "pi";
-    static final String PASS = "gooseberry";
+    static final String USER = "root";
+    static final String PASS = "root";
     protected static final String String = null;
 
     /**
@@ -83,18 +45,16 @@ public class Login extends JFrame //create class NewUser
      */
     public static void main(String[] args) // main method
     {
-        EventQueue.invokeLater(new Runnable()
-        {
+        EventQueue.invokeLater(new Runnable() {
             public void run() //define run method
             {
-                try  //try block
+                try //try block
                 {
                     //create NewUser frame object
-                    Login frame = new Login();
+                    newuser frame = new newuser();
                     //set NewUser frame visible
                     frame.setVisible(true);
-                }
-                catch (Exception e) //catch block
+                } catch (Exception e) //catch block
                 {
                     e.printStackTrace();
                 }
@@ -105,10 +65,10 @@ public class Login extends JFrame //create class NewUser
     /**
      * Create the frame.
      */
-    public Login() //create constructor
+    public newuser() //create constructor
     {
         //set title
-        setTitle("Existing User Login");
+        setTitle("New User Login");
         //set close operation
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //set bounds of frame
@@ -117,7 +77,7 @@ public class Login extends JFrame //create class NewUser
         contentPane = new JPanel();
         //set contentPane border
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        //set ContentPane with new object
+        //set ContentPane with new object;
         setContentPane(contentPane);
         //set contentPane layout is null
         contentPane.setLayout(null);
@@ -146,16 +106,15 @@ public class Login extends JFrame //create class NewUser
         contentPane.add(lblPassword);
 
         //create button signup
-        btnSignup = new JButton("Log in");
+        btnSignup = new JButton("SignUp");
         //add event handler on SignUp button
-        btnSignup.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        btnSignup.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 //Create wrapper object and define it null
                 Wrapper conn = null;
-                try  //try block
-                {
+                try {
+                                    //Class.forName("com.mysql.jdbc.Driver");  
+
                     //declare variables
                     String username = "";
                     String password = "";
@@ -164,50 +123,81 @@ public class Login extends JFrame //create class NewUser
                     username = txtUser.getText().trim();
                     password = txtPassword.getText().trim();
 
-                    // check condition it field equals to blank throw error message
-                    if (username.equals("") || password.equals(""))
-                    {
-                        JOptionPane.showMessageDialog(null, " name or password or Role is wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                    //variables for password strength verification
+                    String lowchars = "abcdefghijklmnopqrstuvwxyz";
+                    String upchars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    String nums = "1234567890";
+                    String syms = "!@#$%^&*-=+_,.`~";
+                    int lowcharcount = 0;
+                    int upcharcount = 0;
+                    int numcount = 0;
+                    int symcount = 0;
+                    boolean valid = true;
+                    //get password character information
+                    for (int i = 0; i < password.length(); i++) {
+                        if (lowchars.contains(password.substring(i, i + 1)))
+                        lowcharcount++;
+                        if (upchars.contains(password.substring(i, i + 1)))
+                        upcharcount++;
+                        if (nums.contains(password.substring(i, i + 1)))
+                        numcount++;
+                        if (syms.contains(password.substring(i, i + 1)))
+                        symcount++;
                     }
-                    else  //else select query is run properly
+
+                    // check condition it field equals to blank throw error message
+                    if (username.equals("") || password.equals("")) {
+                        valid = false;
+                        JOptionPane.showMessageDialog(null, " name or password is empty", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    //check password length
+                    if (password.length() < 8 && valid == true) {
+                        valid = false;
+                        JOptionPane.showMessageDialog(null, " password too short", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    //check for at least 1 lower case character
+                    if (lowcharcount == 0 && valid == true) {
+                        valid = false;
+                        JOptionPane.showMessageDialog(null, " password must contain at least 1 lowercase character", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    //check for at least 1 upper case character
+                    if (upcharcount == 0 && valid == true) {
+                        valid = false;
+                        JOptionPane.showMessageDialog(null, " password must contain at least 1 uppercase character", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    //check for at least number character
+                    if (numcount == 0 && valid == true) {
+                        valid = false;
+                        JOptionPane.showMessageDialog(null, " password must contain at least 1 number", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    //check for at least symbol character
+                    if (symcount == 0 && valid == true) {
+                        valid = false;
+                        JOptionPane.showMessageDialog(null, " password must complain at least 1 symbol", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    if(valid)//else insert query is run properly
                     {
-                        String SQuery = "SELECT PASSWORD FROM freeguardcosc412db.Accounts\n where USERNAME = '" + username + "'";
-                        // System.out.println(SQuery);//print on console
+                        String IQuery = "INSERT INTO `412project`.`accounts`(`username`,`password`) VALUES('" + username + "', '" + password + "')";
+                        System.out.println(IQuery);//print on console
                         System.out.println("Connecting to a selected database...");
 
                         //STEP 3: Open a connection
                         conn = DriverManager.getConnection(DB_URL, USER, PASS);
                         System.out.println("Connected database successfully...");
-                        //pull password connected to username
-                        Statement stmt = ((Connection) conn).createStatement();
-                        ResultSet rs = stmt.executeQuery(SQuery);
-                        String SMessage;
-                        if (!rs.next())
-                        {
-                            SMessage = "Account name not found";
-                        }
-                        else if (rs.getString(1).equals(password))
-                        {
-                            SMessage = "Account found, login successful";
-                            ViewClaim v = new ViewClaim(username);
-                        }
-                        else
-                        {
-                            SMessage = "password incorrect";
-                        }
+
+                        ((Connection) conn).createStatement().execute(IQuery);//select the rows
+                        // define SMessage variable
+                        String SMessage = "Record added for " + username;
 
                         // create dialog ox which is print message
                         JOptionPane.showMessageDialog(null, SMessage, "Message", JOptionPane.PLAIN_MESSAGE);
                         //close connection
                         ((java.sql.Connection) conn).close();
                     }
-                }
-                catch (SQLException se)
-                {
+                } catch (SQLException se) {
                     //handle errors for JDBC
                     se.printStackTrace();
-                }
-                catch (Exception a) //catch block
+                } catch (Exception a) //catch block
                 {
                     a.printStackTrace();
                 }
@@ -229,5 +219,3 @@ public class Login extends JFrame //create class NewUser
     }
 
 }
-				
-

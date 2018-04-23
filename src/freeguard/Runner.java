@@ -12,15 +12,14 @@ import javax.swing.JFrame;
 public class Runner
 {
 
-    public static void main(String[] args)
-    {
-        NewUserFrame u = new NewUserFrame();
-        JFrame myFrame = new JFrame("Test");
-        myFrame.add(u);
-        myFrame.pack();
-        myFrame.setSize(400, 400);
-        myFrame.setVisible(true);
-        u.init();
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        NewUser u = new NewUser();
+        u.main(null);
+        //login l = new login();
+        //l.main(null);
     }
     
 }
