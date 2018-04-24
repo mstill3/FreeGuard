@@ -28,8 +28,18 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              <Component id="outputLabel" min="-2" pref="48" max="-2" attributes="0"/>
-              <EmptySpace pref="330" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="viewClaimsButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      <Component id="submitClaimButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="75" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="outputLabel" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -38,7 +48,12 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Component id="outputLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="245" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="viewClaimsButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="submitClaimButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -46,8 +61,24 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="outputLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel1"/>
+        <Property name="text" type="java.lang.String" value=" "/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="viewClaimsButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View Claims"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewClaimsButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="submitClaimButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Submit Claim"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="submitClaimButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -34,9 +34,10 @@ public class ViewClaim extends JFrame
         
         resultFrame = new JFrame();      //create object of JPanel
         resultFrame.setTitle("View Claims");                                                                                                //set title
-        resultFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        //set close operation                                                                          
+        resultFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);                        //set close operation                                                                          
         resultFrame.setSize(450, 300);                                      //set contentPane border
 
+        resultFrame.setAlwaysOnTop(true);
 
 
         //string builder used to format and store the resulting tables
@@ -97,18 +98,18 @@ public class ViewClaim extends JFrame
 
     }
 
- /*   public static void main(String[] args)
-    {
-        try  //try block
-        {
-            //create NewUser frame object
-            Login frame = new Login();
-            //set NewUser frame visible
-            frame.setVisible(true);
-        }
-        catch (Exception e) //catch block
-        {
-            e.printStackTrace();
-        }
-    }*/
+//    public static void main(String[] args)
+//    {
+//        try  //try block
+//        {
+//            //create NewUser frame object
+//            Login frame = new Login();
+//            //set NewUser frame visible
+//            frame.setVisible(true);
+//        }
+//        catch (Exception e) //catch block
+//        {
+//            e.printStackTrace();
+//        }
+//    }
 }

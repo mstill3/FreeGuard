@@ -47,13 +47,33 @@ public class MainForm extends javax.swing.JFrame
     {
 
         outputLabel = new javax.swing.JLabel();
+        viewClaimsButton = new javax.swing.JButton();
+        submitClaimButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Free Guard");
         setAlwaysOnTop(true);
         setResizable(false);
 
-        outputLabel.setText("jLabel1");
+        outputLabel.setText(" ");
+
+        viewClaimsButton.setText("View Claims");
+        viewClaimsButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                viewClaimsButtonActionPerformed(evt);
+            }
+        });
+
+        submitClaimButton.setText("Submit Claim");
+        submitClaimButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                submitClaimButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,19 +81,41 @@ public class MainForm extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(outputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(viewClaimsButton)
+                        .addGap(52, 52, 52)
+                        .addComponent(submitClaimButton)
+                        .addContainerGap(75, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(outputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(outputLabel)
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewClaimsButton)
+                    .addComponent(submitClaimButton))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void viewClaimsButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewClaimsButtonActionPerformed
+    {//GEN-HEADEREND:event_viewClaimsButtonActionPerformed
+//        dispose();
+        new ViewClaim(email);
+    }//GEN-LAST:event_viewClaimsButtonActionPerformed
+
+    private void submitClaimButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_submitClaimButtonActionPerformed
+    {//GEN-HEADEREND:event_submitClaimButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_submitClaimButtonActionPerformed
 
     public void run()
     {
@@ -87,8 +129,14 @@ public class MainForm extends javax.swing.JFrame
             }
         });
     }
+    
+    //button to view claim
+    //changes
+    //sumbit claim
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel outputLabel;
+    private javax.swing.JButton submitClaimButton;
+    private javax.swing.JButton viewClaimsButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -184,6 +184,7 @@ public class CreateAccountForm extends javax.swing.JFrame
         boolean empty = emptyCheck(email, password, firstName, lastName, middleInitial, ssn);
         
         
+        // @sign in email. 9 integers for ssn 
         if (empty && pass)
         {
             outputLabel.setForeground(new Color(34, 139, 34));
