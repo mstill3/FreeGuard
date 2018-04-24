@@ -34,6 +34,7 @@ public class DatabaseManager
         JDBC_DB_URL = "jdbc:mysql://" + DB_ENDPOINT;
 
         setConnection();
+        setDatabase();
     }
 
     public DatabaseManager(String username, String password, String db_url)
@@ -47,6 +48,7 @@ public class DatabaseManager
         JDBC_DB_URL = "jdbc:mysql://" + DB_ENDPOINT;
 
         setConnection();
+        setDatabase();
     }
 
     private void setConnection()
@@ -69,6 +71,12 @@ public class DatabaseManager
         {
             e.printStackTrace();
         }
+
+    }
+
+    private void setDatabase()
+    {
+        runStatement("use db412");
     }
 
     private String splitExecute(String str)
@@ -94,7 +102,7 @@ public class DatabaseManager
         }
         return rs;
     }
-    
+
     public static String getString(ResultSet set)
     {
         String str = "";
@@ -102,8 +110,7 @@ public class DatabaseManager
         {
             set.next();
             str = set.getString(1);
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             str = "---";
         }
@@ -116,6 +123,17 @@ public class DatabaseManager
         try
         {
             statement.executeQuery(query);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void runStatement(String statement)
+    {
+        try
+        {
+            connect.createStatement().execute(statement);
         } catch (Exception e)
         {
             e.printStackTrace();

@@ -7,19 +7,13 @@
  */
 
 package freeguard;
-import javax.swing.JFrame;
 
 public class Runner
 {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        NewUser u = new NewUser();
-        u.main(null);
-        //login l = new login();
-        //l.main(null);
+    public static void main(String[] args)
+    {
+        new LoginForm().run();
     }
     
 }

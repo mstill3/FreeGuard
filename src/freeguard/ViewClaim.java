@@ -1,17 +1,11 @@
 package freeguard;
 
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.*;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 /**
  * @author Kyle Clabough COSC 412
  *
