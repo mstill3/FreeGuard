@@ -213,7 +213,7 @@ public class CreateAccountForm extends javax.swing.JFrame
             return true;
     }
     
-    private boolean passwordCheck(String password)
+    protected static boolean passwordCheck(String password)
     {
         //variables for password strength verification
         String lowchars = "abcdefghijklmnopqrstuvwxyz";

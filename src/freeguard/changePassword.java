@@ -100,44 +100,7 @@ public class changePassword extends javax.swing.JFrame {
             int upcharcount = 0;
             int numcount = 0;
             int symcount = 0;
-            boolean valid = true;
-            //get password character information
-            for (int i = 0; i < newPassword.length(); i++) {
-                if (lowchars.contains(newPassword.substring(i, i + 1)))
-                    lowcharcount++;
-                if (upchars.contains(newPassword.substring(i, i + 1)))
-                    upcharcount++;
-                if (nums.contains(newPassword.substring(i, i + 1)))
-                    numcount++;
-                if (syms.contains(newPassword.substring(i, i + 1)))
-                    symcount++;
-            }
-            //check password length
-            if (newPassword.length() < 8 && valid == true) {
-                valid = false;
-                JOptionPane.showMessageDialog(null, " password too short", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            //check for at least 1 lower case character
-            if (lowcharcount == 0 && valid == true) {
-                valid = false;
-                JOptionPane.showMessageDialog(null, " password must contain at least 1 lowercase character", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            //check for at least 1 upper case character
-            if (upcharcount == 0 && valid == true) {
-                valid = false;
-                JOptionPane.showMessageDialog(null, " password must contain at least 1 uppercase character", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            //check for at least number character
-            if (numcount == 0 && valid == true) {
-                valid = false;
-                JOptionPane.showMessageDialog(null, " password must contain at least 1 number", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            //check for at least symbol character
-            if (symcount == 0 && valid == true) {
-                valid = false;
-                JOptionPane.showMessageDialog(null, " password must complain at least 1 symbol", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            if(valid)//else insert query is run properly
+            if(CreateAccountForm.passwordCheck(newPassword))
             {
                 DatabaseManager DBM = new DatabaseManager();
                 Connection conn = DriverManager.getConnection(DBM.JDBC_DB_URL, DBM.username, DBM.password);
