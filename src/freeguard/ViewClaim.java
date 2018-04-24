@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
 /**
  * @author Kyle Clabough COSC 412
  *
@@ -15,15 +18,16 @@ public class ViewClaim extends JFrame
 
     private JFrame resultFrame; //declare variable
     private JTable resultTable;
-
+    DatabaseManager db = new DatabaseManager();
     // database URL
-    static final String DB_URL = "jdbc:mysql://freeguardcosc412.cydcykknz8wc.us-east-1.rds.amazonaws.com:3306/mysql?zeroDateTimeBehavior=convertToNull";
+    String DB_URL = db.JDBC_DB_URL;
 
     //  Database credentials
-    static final String USER = "pi";
-    static final String PASS = "gooseberry";
+     String USER = db.username;
+     String PASS = db.password;
+    
     protected static final String String = null;
-    static final int rowNum = 2;
+    static final int ROWNUM = 2;
 
     public ViewClaim(String username)
     {
@@ -41,10 +45,10 @@ public class ViewClaim extends JFrame
         JLabel lblTitle = new JLabel("Claims");
         lblTitle.setBounds(70, 25, 86, 14);
 
-        String SQuery = "select freeguardcosc412db.CLAIMS.CLAIMNO,"
-                + "freeguardcosc412db.CLAIMS.AMOUNT \n"
-                + "FROM freeguardcosc412db.CLAIMS, freeguardcosc412db.Accounts\n"
-                + "WHERE '" + username + "' = Accounts.USERNAME AND CLAIMS.CSSN = Accounts.SSN;";
+        String SQuery = "select db412.SSClaims.idSSClaims,"
+                + "db412.SSClaims.Moneys \n"
+                + "FROM db412.SSClaims, db412.accounts\n"
+                + "WHERE '" + username + "' = accounts.email AND SSClaims.CustomerSSN = accounts.SSN;";
         System.out.println("Connecting to a selected database...");
         System.out.println(SQuery);
 
@@ -58,16 +62,17 @@ public class ViewClaim extends JFrame
             ResultSet rs = stmt.executeQuery(SQuery);
             ResultSetMetaData rsmd = rs.getMetaData();
             columnNum = rsmd.getColumnCount();                                                          //Get number of Columns
-            Object [] [] cellData = new Object [columnNum] [rowNum];
+            Object [] [] cellData = new Object [columnNum] [ROWNUM];
             String [] columnNames = new String [columnNum];
-            for (int i = 0; i< rowNum; i++)
+            for (int i = 0; i< ROWNUM; i++)
             {
                  columnNames [i] = rsmd.getColumnName(i+1);
             }
             int i = 0;
+            rs.next();
             while (rs.next())
             {
-                for (int j = 0; j < columnNum; j++)   //for loop nested in while loop to retrieve the results table
+                for (int j = 0; j < ROWNUM; j++)   //for loop nested in while loop to retrieve the results table
                 {
                     cellData [i] [j] = rs.getString(j+1);
                 }
