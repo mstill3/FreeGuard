@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
  * @author Kyle Clabough COSC 412
  *
  */
-public class ViewClaim extends JFrame
+public class ViewClaimForm extends JFrame
 {
 
     private JFrame resultFrame; //declare variable
@@ -29,7 +29,7 @@ public class ViewClaim extends JFrame
     protected static final String String = null;
     static final int ROWNUM = 2;
 
-    public ViewClaim(String username)
+    public ViewClaimForm(String username)
     {
         
         resultFrame = new JFrame();      //create object of JPanel

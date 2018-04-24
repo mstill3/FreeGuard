@@ -129,36 +129,41 @@ public class LoginForm extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_submitButtonActionPerformed
     {//GEN-HEADEREND:event_submitButtonActionPerformed
         String username = usernameTextBox.getText().trim();
         String password = passwordTextBox.getText().trim();
 
+        String firstName = db.getString(db.getQueryValue("select firstname from accounts where email = '" + username + "';"));
+        String lastName = db.getString(db.getQueryValue("select lastname from accounts where email = '" + username + "';"));
+        String middleInitial = db.getString(db.getQueryValue("select middleinitial from accounts where email = '" + username + "';"));
+        String ssn = db.getString(db.getQueryValue("select SSN from accounts where email = '" + username + "';"));
 
-            ResultSet rs = db.getQueryValue("select password from accounts where email = '" + username + "';");
+//        System.out.println(firstName + " " + middleInitial + " " + lastName + " " + username + " " + password + " " + ssn);
+        
+        ResultSet rs = db.getQueryValue("select password from accounts where email = '" + username + "';");
+        try
+        {
+            if (!rs.next())
+            {
+                outputLabel.setForeground(Color.red);
+                outputLabel.setText("username not found");
+            } else if (rs.getString(1).equals(password))
+            {
+                outputLabel.setForeground(new Color(34, 139, 34)); //green
+                outputLabel.setText("login successful");
 
-            try
+                dispose();
+                new MainForm(username, password, firstName, lastName, middleInitial, ssn).run();
+            } else
             {
-                if (!rs.next())
-                {
-                    outputLabel.setForeground(Color.red);
-                    outputLabel.setText("username not found");
-                } else if (rs.getString(1).equals(password))
-                {
-                    outputLabel.setForeground(new Color(34, 139, 34)); //green
-                    outputLabel.setText("login successful");
-                    
-                    dispose();
-                    new MainForm(username, password, username, username, username, password).run();
-                } else
-                {
-                    outputLabel.setForeground(Color.red);
-                    outputLabel.setText("password incorrect");
-                }
-            } catch (Exception e)
-            {
+                outputLabel.setForeground(Color.red);
+                outputLabel.setText("password incorrect");
             }
+        } catch (Exception e)
+        {
+        }
 
         System.out.println("submit");
 
@@ -171,7 +176,6 @@ public class LoginForm extends javax.swing.JFrame
 
     private void newUserButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_newUserButtonActionPerformed
     {//GEN-HEADEREND:event_newUserButtonActionPerformed
-        dispose();
         new CreateAccountForm().run();
     }//GEN-LAST:event_newUserButtonActionPerformed
 

@@ -17,12 +17,12 @@ import javax.swing.JOptionPane;
  *
  * @author ltder
  */
-public class changePassword extends javax.swing.JFrame {
+public class ChangePasswordForm extends javax.swing.JFrame {
     public static String SSN;
     /**
      * Creates new form changePassword
      */
-    public changePassword(String SSN) {
+    public ChangePasswordForm(String SSN) {
         this.SSN = SSN;
         initComponents();
     }
@@ -34,27 +34,33 @@ public class changePassword extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Change Password");
+        setAlwaysOnTop(true);
 
         jTextField1.setEditable(false);
         jTextField1.setText("Change password:");
 
         jTextField2.setText("Enter new password");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jTextField2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jTextField2ActionPerformed(evt);
             }
         });
 
         jButton1.setText("Next");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton1ActionPerformed(evt);
             }
         });
@@ -100,7 +106,7 @@ public class changePassword extends javax.swing.JFrame {
             int upcharcount = 0;
             int numcount = 0;
             int symcount = 0;
-            if(CreateAccountForm.passwordCheck(newPassword))
+            if(DatabaseManager.passwordCheck(newPassword) == 0)
             {
                 DatabaseManager DBM = new DatabaseManager();
                 Connection conn = DriverManager.getConnection(DBM.JDBC_DB_URL, DBM.username, DBM.password);
@@ -121,7 +127,7 @@ public class changePassword extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void run() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -135,20 +141,21 @@ public class changePassword extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(changePassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChangePasswordForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(changePassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChangePasswordForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(changePassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChangePasswordForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(changePassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChangePasswordForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+         //</editor-fold>
+       //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new changePassword(SSN).setVisible(true);
+   public void run() {
+                new ChangePasswordForm(SSN).setVisible(true);
             }
         });
     }

@@ -15,8 +15,10 @@ public class SubmitClaimForm extends javax.swing.JFrame
     /**
      * Creates new form submitClaimForm
      */
-    public SubmitClaimForm()
+    public SubmitClaimForm(String ssn)
     {
+        db = new DatabaseManager();
+        this.ssn = ssn;
         initComponents();
     }
 
@@ -30,26 +32,81 @@ public class SubmitClaimForm extends javax.swing.JFrame
     private void initComponents()
     {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        submitButton = new javax.swing.JButton();
+        moneyTextBox = new javax.swing.JTextField();
+        displayLabel = new javax.swing.JLabel();
+
+        setTitle("Submit Claim");
+        setAlwaysOnTop(true);
+
+        submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                submitButtonActionPerformed(evt);
+            }
+        });
+
+        moneyTextBox.setText(" ");
+        moneyTextBox.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                moneyTextBoxActionPerformed(evt);
+            }
+        });
+
+        displayLabel.setText("Enter Amount of Money to File For:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(displayLabel)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(submitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(moneyTextBox))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(displayLabel)
+                    .addComponent(moneyTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(submitButton)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_submitButtonActionPerformed
+    {//GEN-HEADEREND:event_submitButtonActionPerformed
+        int money = Integer.parseInt(moneyTextBox.getText().trim());
+        db.runStatement("insert into SSClaims(`CustomerSSN`, `Moneys`) values('" + ssn + "', '" + money + "');");
+        
+//           insert into SSClaims(`CustomerSSN`, `Moneys`) values('999999999', '10');
+
+        System.out.println(money);
+        dispose();
+    }//GEN-LAST:event_submitButtonActionPerformed
+
+    private void moneyTextBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_moneyTextBoxActionPerformed
+    {//GEN-HEADEREND:event_moneyTextBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_moneyTextBoxActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[])
+    public void run()
     {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -85,11 +142,17 @@ public class SubmitClaimForm extends javax.swing.JFrame
         {
             public void run()
             {
-                new SubmitClaimForm().setVisible(true);
+                new SubmitClaimForm(ssn).setVisible(true);
             }
         });
     }
 
+    private DatabaseManager db;
+    private String ssn;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel displayLabel;
+    private javax.swing.JTextField moneyTextBox;
+    private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -154,15 +154,15 @@ public class EditAccountFrame extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if(jRadioButton1.isSelected()){
-            changeName changeName = new changeName(jTextField6.getText());
+            ChangeNameForm changeName = new ChangeNameForm(jTextField6.getText());
             changeName.setVisible(true);
         }
         if(jRadioButton2.isSelected()){
-            changeEmail changeEmail = new changeEmail(jTextField6.getText());
+            ChangeEmailForm changeEmail = new ChangeEmailForm(jTextField6.getText());
             changeEmail.setVisible(true);
         }
         if(jRadioButton3.isSelected()){
-            changePassword changePassword = new changePassword(jTextField6.getText());
+            ChangePasswordForm changePassword = new ChangePasswordForm(jTextField6.getText());
             changePassword.setVisible(true);
         }
     }//GEN-LAST:event_jButton4ActionPerformed

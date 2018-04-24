@@ -103,7 +103,7 @@ public class DatabaseManager
         return rs;
     }
 
-    public static String getString(ResultSet set)
+    public String getString(ResultSet set)
     {
         String str = "";
         try
@@ -153,4 +153,57 @@ public class DatabaseManager
         }
     }
 
+    protected static int passwordCheck(String password)
+    {
+        //variables for password strength verification
+        String lowchars = "abcdefghijklmnopqrstuvwxyz";
+        String upchars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String nums = "1234567890";
+        String syms = "!@#$%^&*-=+_,.`~";
+        int lowcharcount = 0;
+        int upcharcount = 0;
+        int numcount = 0;
+        int symcount = 0;
+
+        //get password character information
+        for (int i = 0; i < password.length(); i++)
+        {
+            if (lowchars.contains(password.substring(i, i + 1)))
+                lowcharcount++;
+            if (upchars.contains(password.substring(i, i + 1)))
+                upcharcount++;
+            if (nums.contains(password.substring(i, i + 1)))
+                numcount++;
+            if (syms.contains(password.substring(i, i + 1)))
+                symcount++;
+        }
+
+        //check password length
+        if (password.length() < 8)
+        {
+            return 1;
+        }
+        //check for at least 1 lower case character
+        if (lowcharcount == 0)
+        {
+            return 2;
+        }
+        //check for at least 1 upper case character
+        if (upcharcount == 0)
+        {
+            return 3;
+        }
+        //check for at least number character
+        if (numcount == 0)
+        {
+            return 4;
+        }
+        //check for at least symbol character
+        if (symcount == 0)
+        {
+            return 5;
+        }
+
+        return 0;
+    }
 }

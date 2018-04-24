@@ -48,7 +48,6 @@ public class CreateAccountForm extends javax.swing.JFrame
         createButton = new javax.swing.JButton();
         outputLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Create Account");
         setAlwaysOnTop(true);
         setResizable(false);
@@ -180,12 +179,33 @@ public class CreateAccountForm extends javax.swing.JFrame
         String middleInitial = middleInitialTextBox.getText().trim();
         String ssn = ssnTextBox.getText().trim();
 
-        boolean pass = passwordCheck(password);
+        int pass = DatabaseManager.passwordCheck(password);
+        switch (pass){
+            case 1:
+                outputLabel.setForeground(Color.red);
+                outputLabel.setText("password too short");
+                break;
+            case 2:
+                outputLabel.setForeground(Color.red);
+                outputLabel.setText("password must contain at least 1 lowercase character");
+                break;
+            case 3:
+                outputLabel.setForeground(Color.red);
+                outputLabel.setText("password must contain at least 1 uppercase character");
+                break;
+            case 4:
+                outputLabel.setForeground(Color.red);
+                outputLabel.setText("password must contain at least 1 number");
+                break;
+            case 5:
+                outputLabel.setForeground(Color.red);
+                outputLabel.setText("password must complain at least 1 symbol");
+                break;
+        }
         boolean empty = emptyCheck(email, password, firstName, lastName, middleInitial, ssn);
         
         
-        // @sign in email. 9 integers for ssn 
-        if (empty && pass)
+        if (empty && pass == 0)
         {
             outputLabel.setForeground(new Color(34, 139, 34));
             outputLabel.setText("Account Created");
@@ -213,7 +233,7 @@ public class CreateAccountForm extends javax.swing.JFrame
             return true;
     }
     
-    protected static boolean passwordCheck(String password)
+    /*protected boolean passwordCheck(String password)
     {
         //variables for password strength verification
         String lowchars = "abcdefghijklmnopqrstuvwxyz";
@@ -275,7 +295,7 @@ public class CreateAccountForm extends javax.swing.JFrame
         }
 
         return true;
-    }
+    }*/
 
     private void emailTextBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_emailTextBoxActionPerformed
     {//GEN-HEADEREND:event_emailTextBoxActionPerformed

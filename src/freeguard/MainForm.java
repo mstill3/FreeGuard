@@ -48,6 +48,7 @@ public class MainForm extends javax.swing.JFrame
 
         outputLabel = new javax.swing.JLabel();
         viewClaimsButton = new javax.swing.JButton();
+        settingsButton = new javax.swing.JButton();
         submitClaimButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,6 +64,15 @@ public class MainForm extends javax.swing.JFrame
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 viewClaimsButtonActionPerformed(evt);
+            }
+        });
+
+        settingsButton.setText("Settings");
+        settingsButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                settingsButtonActionPerformed(evt);
             }
         });
 
@@ -84,12 +94,14 @@ public class MainForm extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(viewClaimsButton)
-                        .addGap(52, 52, 52)
-                        .addComponent(submitClaimButton)
-                        .addContainerGap(75, Short.MAX_VALUE))
+                        .addGap(52, 52, 52))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(outputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(settingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(submitClaimButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,7 +112,9 @@ public class MainForm extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewClaimsButton)
                     .addComponent(submitClaimButton))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(settingsButton)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -109,12 +123,17 @@ public class MainForm extends javax.swing.JFrame
     private void viewClaimsButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewClaimsButtonActionPerformed
     {//GEN-HEADEREND:event_viewClaimsButtonActionPerformed
 //        dispose();
-        new ViewClaim(email);
+        new ViewClaimForm(email);
     }//GEN-LAST:event_viewClaimsButtonActionPerformed
+
+    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_settingsButtonActionPerformed
+    {//GEN-HEADEREND:event_settingsButtonActionPerformed
+        new SettingsForm(email, password, firstName, lastName, middleInitial, ssn).run();
+    }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void submitClaimButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_submitClaimButtonActionPerformed
     {//GEN-HEADEREND:event_submitClaimButtonActionPerformed
-        // TODO add your handling code here:
+        new SubmitClaimForm(ssn).run();
     }//GEN-LAST:event_submitClaimButtonActionPerformed
 
     public void run()
@@ -136,6 +155,7 @@ public class MainForm extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel outputLabel;
+    private javax.swing.JButton settingsButton;
     private javax.swing.JButton submitClaimButton;
     private javax.swing.JButton viewClaimsButton;
     // End of variables declaration//GEN-END:variables
