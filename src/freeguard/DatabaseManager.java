@@ -29,8 +29,8 @@ public class DatabaseManager
         statement = null;
 
         username = "root";
-        password = "gooseberry";
-        DB_ENDPOINT = "mydatabase.cvgyj3lrdmp1.us-east-2.rds.amazonaws.com";
+        password = "toorroot";
+        DB_ENDPOINT = "db412.cklzsxoqzmcc.us-east-2.rds.amazonaws.com";
         JDBC_DB_URL = "jdbc:mysql://" + DB_ENDPOINT;
 
         setConnection();

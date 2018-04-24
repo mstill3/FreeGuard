@@ -8,10 +8,15 @@
 
 package freeguard;
 
-import java.sql.Wrapper;
-import javax.swing.JOptionPane;
+
 import javax.swing.JApplet;
 import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Wrapper;
+import javax.swing.JOptionPane;
+import freeguard.DatabaseManager;
 
 public class NewUserFrame extends JApplet
 {
@@ -189,7 +194,7 @@ public class NewUserFrame extends JApplet
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFNActionPerformed
 
-    private void jButton1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
                  //  Database credentials
                 final String USER = "root";
                 final String PASS = "toorroot";
@@ -276,17 +281,22 @@ public class NewUserFrame extends JApplet
                         System.out.println("Connecting to a selected database...");
 
                         //STEP 3: Open a connection
-DatabaseManager db = new DatabaseManager();
-System.out.println("Connected database successfully...");
+                        DatabaseManager db = new DatabaseManager();
+                        conn = DriverManager.getConnection(db.JDBC_DB_URL, db.username, db.password);
+                        System.out.println("Connected database successfully...");
 
-db.runQuery(IQuery); // define SMessage variable
+                        ((Connection) conn).createStatement().execute(IQuery);//select the rows
+                        // define SMessage variable
                         String SMessage = "Record added for " + username;
 
                         // create dialog ox which is print message
                         JOptionPane.showMessageDialog(null, SMessage, "Message", JOptionPane.PLAIN_MESSAGE);
                         //close connection
-                        db.closeConnection();
+                        ((java.sql.Connection) conn).close();
                     }
+                } catch (SQLException se) {
+                    //handle errors for JDBC
+                    se.printStackTrace();
                 } catch (Exception a) //catch block
                 {
                     a.printStackTrace();

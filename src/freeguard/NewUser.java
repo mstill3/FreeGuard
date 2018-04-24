@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+
 public class NewUser extends JFrame //create class NewUser
 {
 
@@ -31,14 +32,6 @@ public class NewUser extends JFrame //create class NewUser
     private JButton btnSignup;
     private JTextField txtPassword;
     protected java.lang.String Spassword;
-
-    // database URL
-    static final String DB_URL = "jdbc:mysql://localhost/412project";
-
-    //  Database credentials
-    static final String USER = "root";
-    static final String PASS = "root";
-    protected static final String String = null;
 
     /**
      * Launch the application.
@@ -177,21 +170,23 @@ public class NewUser extends JFrame //create class NewUser
                     }
                     if(valid)//else insert query is run properly
                     {
-                        String IQuery = "INSERT INTO `freeguardcosc412db`.`Accounts`(`username`,`password`,`ssn`) VALUES('" + username + "', '" + password + "', 987654321)";
+                        String IQuery = "INSERT INTO `412project`.`accounts`(`username`,`password`) VALUES('" + username + "', '" + password + "')";
                         System.out.println(IQuery);//print on console
                         System.out.println("Connecting to a selected database...");
 
+                        //STEP 3: Open a connection
                         DatabaseManager db = new DatabaseManager();
+                        conn = DriverManager.getConnection(db.JDBC_DB_URL, db.username, db.password);
                         System.out.println("Connected database successfully...");
 
-                        db.runQuery(IQuery);
+                        ((Connection) conn).createStatement().execute(IQuery);//select the rows
                         // define SMessage variable
                         String SMessage = "Record added for " + username;
 
                         // create dialog ox which is print message
                         JOptionPane.showMessageDialog(null, SMessage, "Message", JOptionPane.PLAIN_MESSAGE);
                         //close connection
-                        db.closeConnection();
+                        ((java.sql.Connection) conn).close();
                     }
                 } catch (Exception se) {
                     //handle errors for JDBC
